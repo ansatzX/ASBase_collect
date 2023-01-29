@@ -1,3 +1,6 @@
 .DS_Store
 pages/.DS_Store
 pages/*.html
+*.hdf5
+xyzs/*.xyz
+pdbs/*.pdb

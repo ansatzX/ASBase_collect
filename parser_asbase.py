@@ -34,6 +34,9 @@ def get_solubility(elem):
         res.append(':'.join([solution, solubility]))
     return ",".join(res)
 
+def get_pdb_structure(elem):
+    pdb_block = elem.get_text().strip()
+    return pdb_block
 
 def parse_html(text):
     # pasrse html 2 dict
@@ -68,6 +71,8 @@ def parse_html(text):
                     bodystr = get_thermostable(ele)
                 elif "Solubility" in header:
                     bodystr = get_solubility(ele)
+                elif "optimized structure" in header:
+                    bodystr = get_pdb_structure(ele)
                 else:
                     bodystr = ele.get_text().strip().replace("\n", "  ")
                 if header not in skipped_headers:
