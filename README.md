@@ -3,6 +3,13 @@
 This repo store scripts which can grab web database to h5 databse.
 
 ## usage
+* Prerequisites: 
+    - h5py 
+    - rdkit
+    - numpy
+    - bs4
+    - requests
+    - requests
 
 1. download data from web [ASBase](http://119.91.135.188:8080)
 
@@ -27,12 +34,8 @@ python extract_3D.py
 
 4. transfer 3D file to gaussian input 
 
-first use openbabel convert .pdb to .xyz
-```
-obabel -ixyz -opdb input.pdb  -O input.xyz
-```
 
-then call [geninput](https://github.com/ansatzX/graduation-thesis-BSC/blob/main/tocomp/mole/geninput), a shell script which convert .xyz to gaussian input .gjf
+call [geninput](https://github.com/ansatzX/graduation-thesis-BSC/blob/main/tocomp/mole/geninput), a shell script which convert .xyz to gaussian input .gjf
 
 ```
 geninput input.xyz

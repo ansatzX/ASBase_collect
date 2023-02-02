@@ -4,6 +4,8 @@ import numpy as np
 import pandas as pd
 from rdkit import Chem
 from rdkit.Chem import AllChem
+import subprocess
+import typing
 
 
 def conf_gen(smi, conf_number, smi_charge):
@@ -21,6 +23,13 @@ def conf_gen(smi, conf_number, smi_charge):
     conf_mol = Chem.MolToXYZBlock(m, confId=label)
     del cids
     return conf_mol
+
+
+def convert_pdb2xyz(filename: str, pdbfolder: str, xyzfolder: str) -> str:
+    cmd = [
+        'obabel', '-ixyz -opdb', f'{pdbfolder}/{filename}.pdb', '-O',
+        f'{xyzfolder}/{filename}.xyz'
+    ]    #obabel -ixyz -opdb input.pdb  -O input.xyz
 
 
 db = h5py.File("testdb.hdf5", "r")
@@ -47,6 +56,8 @@ for id in IDs:
     else:
         with open("pdbs/" + id + ".pdb", "w") as f:
             f.write(pdb_block)
+        convert_pdb2xyz(filename=id, pdbfolder="pdbs", xyzfolder="xyzs")
+
     del group
-    
+
 db.close()
